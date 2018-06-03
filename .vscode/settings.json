@@ -1,6 +1,7 @@
 {
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "git.ignoreLimitWarning": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "files.associations": {
         "*.tcc": "cpp",
         "cctype": "cpp",
@@ -27,4 +28,5 @@
         "typeinfo": "cpp",
         "utility": "cpp"
     }
+    
 }
