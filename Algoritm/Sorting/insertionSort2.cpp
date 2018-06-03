@@ -2,29 +2,25 @@
 #include <iostream>
 #include <vector>
 
-void insertionSort2(int n,  std::vector<int> &array)
+void insertionSort2(int n,  std::vector<int> &arr)
 {
     int counter=1;
 
     do
     {
-        std::cout << "\nCounter: "<< counter << std::endl; 
-        
         for(int i=0; i<counter;i++)
         {
-            std::cout << "check: "<< array[i] <<" lower than "<< array[counter] << std::endl;
-            if(array[counter] < array[i])
+            if(arr[counter] < arr[i])
             {
-                std::cout << "swap " << array[i]  << " and " << array[counter] << std::endl;
-                std::swap(array[i],array[counter]);
+                std::swap(arr[i],arr[counter]);
             }
         }
 
         for(int i=0; i<n; i++)
         {
-            std::cout << "[" << array[i] << "] ";
+            std::cout << arr[i] << " ";
         }
-
+        std::cout << std::endl;
         counter++;
     }
     while(counter != n);
@@ -32,9 +28,15 @@ void insertionSort2(int n,  std::vector<int> &array)
 
 int main(){
     
-    std::vector<int> nArray = {1,4,7,9,3,5,6,10,22};
-   
-    insertionSort2(nArray.size(), nArray); 
+    std::vector<int> narr = {1,4,3,5,6,2}; // example input
+    // expected output 
+    // 1 4 3 5 6 2
+    // 1 3 4 5 6 2
+    // 1 3 4 5 6 2
+    // 1 3 4 5 6 2
+    // 1 2 3 4 5 6
+    
+    insertionSort2(narr.size(), narr); 
 
     return 0;    
 } 
