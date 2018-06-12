@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include <algorithm>
 
 bool checkString(std::string &s1, std::string &s2)
 {
@@ -15,19 +16,7 @@ bool checkString(std::string &s1, std::string &s2)
 void bigSorting (std::vector<std::string> &arr)
 {
     int counter = 1;
-    do    
-    {
-        //do sort
-        for(int i=0; i <= counter; i++)
-        {
-            if(checkString(arr[counter], arr[i]))
-            {
-                std::swap(arr[counter], arr[i]);
-            }
-        }
-        counter++;
-    }
-    while(counter != (int)arr.size());
+    std::sort(arr.begin(), arr.end(), checkString);
     
     for(auto &n : arr)
     {
