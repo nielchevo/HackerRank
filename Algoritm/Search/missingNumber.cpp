@@ -3,6 +3,9 @@
 #include<vector>
 
 using namespace std;
+
+static int diffMax = 100;
+
 // for sake of learning, im not using std max lib :(
 int getMax(vector<int> arr)
 { 
@@ -19,7 +22,7 @@ int getMax(vector<int> arr)
 vector<int> countDuplicate(vector<int> arr)
 {
     vector<int> temp;
-    temp.assign(2000, 0);
+    temp.assign(200000, 0);
 
     for(int i=0; i< arr.size(); i++)
     {
