@@ -1,24 +1,33 @@
 
 const newYearChaos = (arr) =>{ 
-    let count =0;
+    let count = 0; let isChaotic = false;
+
     for(let i=arr.length -1; i >=0; i--) {
         if(arr[i] - (i+1) > 2) {
-            console.log('too chaotic')
+            isChaotic = true;
             break;
         } 
 
-        // exp:. math.max is for determine if arr[i] - 2 is minus
-        for(let j = Math.max(0, (arr[i] - 2)); j < i; j++) {
+        //bubble sort 
+        // avoid time out in Hackerrank ues 'j = Math.max(0, arr[i] - 2)'
+        for(let j = 0; j < i; j++) {
             if(arr[j] > arr[i]) {
-                //console.log(arr[j], arr[i])
+                console.log(arr[j], arr[i])
                 count++
             }
-        }    
+        }
     }
-    return count
+
+    if(isChaotic) {
+        console.log('Too Chaotic')
+    } else {
+        console.log(count)
+    }
 }
 
-var arr = [2, 1, 5, 3, 4]
-//var arr = [2, 5, 1, 3, 4]
+var arr = [1, 2, 5, 3, 7, 8, 6, 4]
+//var arr = [2, 1, 5, 3, 4]
+//var arr = [2, 5, 1, 3, 4] // chaotic sample
+
 var result = newYearChaos(arr)
 console.log(result)
