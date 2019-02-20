@@ -1,19 +1,22 @@
-function main(s) {
-    s.map( text => {
-        hackerrankInString(text)
-    })
-}
 
-function hackerrankInString(s) {
-    let pattern = "hackerrank"
+/** @define {Array} */
+var stringSet = ['hereiamstackerrank', 'Hackskerss'];
 
-    for(let i=0; i<s.length; i++) {
-        if(s[i] == pattern[i%10]){
-            console.log(s[i], pattern[i%10])
-        }
-        console.log(s[i], pattern[i%10])
+function HackerRankInString(arr) {
+    let strCheck = 'hackerrank';
+    let j=0;
+    if(arr.length < strCheck.length) {
+        return;
     }
+    for(let i=0; i < arr.length; i++) {
+        console.log("%s %s", arr[i], strCheck[j]);
+        if(arr[i] == strCheck[j]) {
+            j++;
+        }
+    }
+
+    return (j == strCheck.length) ? "YES" : "NO";
 }
 
-var stringSet=["hereiamstackerrank"/*, "hackerworld"*/]
-main(stringSet)
+var results = HackerRankInString('heriamstackerrank');
+console.log(results);
