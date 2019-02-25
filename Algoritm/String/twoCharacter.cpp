@@ -1,62 +1,62 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
+#include <iterator>
 
 using namespace std;
 
-void checkPattern(string pattern, string input, int index, int next)
-{   
-  
-}
-
-void combineUtil(string input, string data, int begin, int end, int index, int r)
-{
-    if(index == r)
-    {   //print stuff
-        for(int i=0; i < r; i++)
-        {
-            cout << data[i];
-        }
-        cout << "\n";
-        return;
+int alternate(string s) {
+    
+    unordered_set<char> ss; 
+    for (char c : s) {
+        cout << "charmap : " << c << endl; 
+        ss.insert(c);   
     }
-    else
-    {
-        for(int i=begin; i < end; i++)
-        {   
-            data.push_back(input[i]);
-            combineUtil(input, data, i+1, end, index+1, r);
-            data.pop_back();
-        }
-    }
-}
+    
+    std::copy(ss.begin(), ss.end(), std::ostream_iterator<char>(std::cout, " "));
 
- string removeDuplicate(string input, int strLength)
- {
-    int index = input.length() - strLength;
-    if(strLength != 0)
-    {
-        for(int i = index+1; i < input.length(); i++)
-        {
-            if(input[i] == input[index])
-            {
-                input.erase(input.begin() + i);
+    int max = 0;
+    unordered_set<char>::iterator itr; 
+    for (itr = ss.begin(); itr != ss.end(); itr++) {
+        for (unordered_set<char>::iterator itr2 = next(itr, 1); itr2 != ss.end(); itr2++) {
+            int locallen = 0;
+            char a = ' ';
+            //cout << "1: " << *itr << ", 2: " << *itr2 << endl;
+            for (int x = 0; x < s.length(); x++) {                
+                if (s[x] == (*itr) || s[x] == (*itr2)) {
+                    if (a == ' '){
+                        //cout << s[x];
+                        a = s[x];
+                        locallen++;
+                    }
+                    else {
+                        if (s[x] != a) {
+                            locallen++;
+                            a = s[x];
+                            //cout << s[x];
+                        } else { //invalid string
+                            //cout << s[x] << "-break";
+                            locallen = 0;
+                            break;
+                        }                            
+                    }
+                }
             }
-        }
-        removeDuplicate(input, strLength-1);
+            //cout << " -- " << locallen << endl;
+            if (max < locallen)
+                max = locallen;
+        }        
     }
-    return input;
- }
+    return max;
+}
 
 int main() {
     //be
     std::string input = "beabeefeab";
-    std::string data;
-    int n = input.size();
-    int r = 2;  // max count of combination
-
-    string pattern = removeDuplicate(input, n);
-    cout << input << endl;
-    checkPattern("be", input, 0, 0);
     
+    int result = alternate(input);
+    cout << result << endl;
+
+    system("pause");
     return 0;
 }
