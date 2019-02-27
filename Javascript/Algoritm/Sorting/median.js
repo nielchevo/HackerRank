@@ -11,6 +11,7 @@ left:  [ 10, 30 ]
 right:  [ 80, 90 ]
 left:  [ 10, 30, 40 ]
 left:  [ 10, 30, 40, 50 ]
+// from here do quicksort(left)
 pivot:  50
 left:  [ 10 ]
 left:  [ 10, 30 ]
@@ -20,6 +21,7 @@ left:  [ 10 ]
 left:  [ 10, 30 ]
 pivot:  30
 left:  [ 10 ]
+// from here start to quickSort(right)
 pivot:  90
 left:  [ 80 ]
 
@@ -30,11 +32,13 @@ function quickSort(arr) {
     if(arr.length <=1 )
         return arr;
 
+    // Use the last element of array as Key
     var pivot = arr[arr.length-1];
    
     var left=[];
     var right=[];
 
+    // Separate
     for(var i= 0; i < arr.length-1; i++) {
         if(arr[i] < pivot) {
             left.push(arr[i])
@@ -42,6 +46,7 @@ function quickSort(arr) {
             right.push(arr[i]);
         }
     }
+
 
     return quickSort(left).concat(pivot, quickSort(right));
 };
