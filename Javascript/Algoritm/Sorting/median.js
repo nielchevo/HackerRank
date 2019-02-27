@@ -38,7 +38,6 @@ function quickSort(arr) {
     var left=[];
     var right=[];
 
-    // Separate
     for(var i= 0; i < arr.length-1; i++) {
         if(arr[i] < pivot) {
             left.push(arr[i])
@@ -46,7 +45,6 @@ function quickSort(arr) {
             right.push(arr[i]);
         }
     }
-
 
     return quickSort(left).concat(pivot, quickSort(right));
 };
@@ -61,7 +59,6 @@ function findMedian(arr) {
 }
 
 var input = "0 1 2 4 6 5 3".split(" ").map(x => Number(x));
-
 console.log(input);
 var result = findMedian(input);
 console.log(result);
