@@ -1,0 +1,20 @@
+2. find duplicate element
+
+input : 
+5 
+array of names = [ball, box, ball, ball, ball, box]
+array of weight = [2, 2, 2, 2, 2]
+array of price = [1, 2, 1, 1, 2] 
+
+output : 
+mengembalikan jumlah element yang tidak duplikat.
+2
+
+desc:
+mencari element i yang tidak duplikat 5 elemen karena element [2](ball, 2, 1) == element [0](ball, 2, 1) maka element [2] di anggap duplikat. begitu juga element [1](box, 2, 2) == element [4](box, 2, 2) maka ini dianggap duplikat.
+
+contoh fungsi HackerRank (c++)
+int findDuplicate(vector<string> names, vector<int> weights, vector<int> prices)
+{
+    // your code below 
+}
