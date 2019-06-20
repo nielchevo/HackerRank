@@ -18,7 +18,7 @@ int pangkat(int x, int y) {
         return 1;
     }
 
-    return x * pangkat(x,y-1);
+    return x * pangkat(x, y-1);
 }
 
 int main () {
