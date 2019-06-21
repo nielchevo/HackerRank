@@ -27,33 +27,38 @@ using namespace std;
     Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 */
 
+// linear solution
 int lengthOfLongestSubstring(string s) 
 {
     unordered_map<char, int> map;
-    
-    int marker = 0; int maxresult = 0; 
+    int index=0; 
+    int lengthResult =0;
 
     for(int i=0; i<s.length();i++) 
     {
         if(map.count(s[i]))
         {
-            marker = i - map[s[i]];
-            int distance = i - marker;
+            //calculate distance from duplicate char.
+            int distanceFromDupe = i - map[s[i]];
 
-            printf("marker: %i distance: %i = i: %i\ - dupe pos %i \n", marker, distance, i, map[s[i]]);
-            if(distance >= maxresult)
-                maxresult = distance;
+            // calculate duplicate from starting index now.
+            int distanceFromIndex = i - index;
+
+            printf("%d = %d - %d | %d = i - %d\n", distanceFromDupe, i, map[s[i]], distanceFromIndex, index);    
+            
+            //set current start point after found the duplicate char.
+            index = i;
+
+            if(max(distanceFromDupe, distanceFromIndex) > lengthResult)
+            {
+                lengthResult = max(distanceFromDupe, distanceFromIndex);
+            }
         }
 
         map[s[i]] = i;
     }
-    
-    for(const auto &x :map)
-    {
-        printf("map : %c : %i\n",x.first, x.second); 
-    }
 
-    return maxresult;
+    return lengthResult;
 }
 
 int main() 
@@ -63,7 +68,7 @@ int main()
     string input3= "pwwkew";
     string custom= "abcaxztvz";
 
-    cout << lengthOfLongestSubstring(input);
+    cout << lengthOfLongestSubstring(input3);
 
     return 0;
 }
