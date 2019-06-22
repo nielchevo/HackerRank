@@ -24,14 +24,14 @@ vector<int> twoSums(vector<int>& nums, int target)
     
     for (int i = 0; i < nums.size(); i++) {
         
-        temp[nums[i]] = i;
-
         int b = target - nums[i];        
 
         if(temp.count(b)) 
         {
             return {i, temp[b]};
         }
+        
+        temp[nums[i]] = i;
     }
 
     // for(const auto  &z: temp){
@@ -43,8 +43,9 @@ vector<int> twoSums(vector<int>& nums, int target)
 
 int main () {
 
-    vector<int> num = {2, 7, 11, 15};
-    
+    vector<int> num = {2, 7, 11, 15}; //target 13
+    vector<int> num2 = {3, 2, 4}; // target 6
+
     // print result
     for(auto &x: twoSums(num, 13))
     {
