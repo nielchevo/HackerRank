@@ -2,18 +2,18 @@
 
 int factorial(int x)
 {
-
-}
-
-int main ()
-{
-    int x=3, result = 1;
+    int result = 1;
     for(int i=1; i<=x; i++)
     {
         result = result * i;
     }
+    return result;
+}
 
-    std::cout << result << std::endl;
+int main ()
+{
+    int input = 5;
+    std::cout << factorial(input) << std::endl;
 
     return 1;
 }
