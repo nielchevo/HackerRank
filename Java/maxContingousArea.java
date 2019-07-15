@@ -1,121 +1,89 @@
 import java.util.HashMap;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 /**
  * maxContingousArea
  */
 public class maxContingousArea {
 
-    private static int currentRegion = 0;
-    private static HashMap<Integer, Integer> listArea = new HashMap<>();
+    private static boolean[][] visited;
+    private static int m_row, m_col;
+    private static int m_maxArea, m_currentArea;
 
-    private static boolean checkLeft(int r, int c, int[][]mArr) 
+    private static boolean CheckValue(int[][] mArr, int mRow, int mCol, boolean[][] visited, int flag)
     {
         try
         {
-            if(mArr[r-1][c] == mArr[r][c])
+            if((mRow >= 0) && (mRow < m_row) && (mCol >= 0) && (mCol < m_col)   //check boundary
+                && !visited[mRow][mCol]                     // check is visited
+                && mArr[mRow][mCol] == flag)                // check if value is same
+            {
                 return true;
+            }
+            
+            System.out.printf("Check FAILED! row: %s col: %s visited: %s | arr: %d != flag: %d \n", 
+                                mRow, mCol, visited[mRow][mCol], mArr[mRow][mCol], flag );
 
             return false;
-        }  
-        catch(ArrayIndexOutOfBoundsException ex)
+        }
+        catch(Exception ex)
         {
-            
-            System.out.println("array LEFT of out bound!");
+            System.out.println(ex.getMessage());
             return false;
         }
     }
 
-    private static boolean checkUp(int r, int c, int[][]mArr) 
+    private static void DeepFirstSearch(int[][] mArr, int mRow, int mCol, boolean[][] visited, int find)
     {
-        try
+        if(CheckValue(mArr, mRow, mCol, visited, find))
         {
-            if(mArr[r][c-1] == mArr[r][c])
-                return true;
-            
-            return false;
-        }  
-        catch(ArrayIndexOutOfBoundsException ex)
-        {
-            System.out.println("array UP of out bound!");
-            return false;
+            visited[mRow][mCol] = true;
+
+            System.out.println("check ok");
+            m_currentArea++;
+
+            DeepFirstSearch(mArr, mRow, mCol-1, visited, find); // north
+            DeepFirstSearch(mArr, mRow+1, mCol, visited, find); // east
+            DeepFirstSearch(mArr, mRow, mCol+1, visited, find); // south
+            DeepFirstSearch(mArr, mRow-1, mCol, visited, find); // west
+
         }
     }
 
-    private static int checkMaxArea(int[][] mArray) 
+    private static int CheckLargestRegion(int[][] mArr)
     {
-        // Get dimension W x H
-        int col = mArray[0].length;
-        int row = mArray.length;
+        m_row = mArr[0].length;
+        m_col = mArr.length;
+
+        // To track visited cell.
+        visited = new boolean[m_row][m_col];
         
-        System.out.format("COL: %d ROW: %d\n", col, row);
+        for(int i=0; i < m_row; i++)
+        {
+            for (int j=0; j< m_col; j++)
+            {
+                if(visited[i][j] == false)
+                {
+                    m_currentArea = 0;
+                    DeepFirstSearch(mArr, i, j, visited, mArr[i][j]);
+
+                    m_maxArea = Math.max(m_maxArea, m_currentArea);
+                }
+            }
+        }
         
-        // array var for track region
-        int[][] mVisited = new int[row][col];
-        HashMap<Integer, Integer> mTracker = new HashMap<>();
-
-        int current_region = 0;
-        int max_area;
-
-        for (int r=0; r<row; r++)
-        {
-            for (int c=0; c<col; c++)
-            {
-                // check left and up of current array position.
-                
-                boolean isLeft  = checkLeft(r, c, mArray);
-                boolean isUp = checkUp(r, c, mArray);
-
-                if(isLeft && isUp)
-                {
-                    // Track this region
-                    mVisited[r][c] = mArray[r][c];
-                    
-                    continue;
-                }
-
-                if(isLeft)
-                {
-                    mVisited[r][c] = mVisited[r-1][c];
-
-                }
-                else if(isUp)
-                {
-                    mVisited[r][c] = mVisited[r][c-1];
-                }
-                else
-                {
-                    current_region++;
-                    mVisited[r][c] = current_region;
-                    listArea.put(current_region, mArray[r][c])
-                }
-                
-            }
-            System.out.println();
-        }
-
-        // check array visited
-        for(int i=0; i<row; i++)
-        {
-            for(int j=0; j<col; j++)
-            {
-                System.out.print(mVisited[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        return 0;
+        return m_maxArea;
     }
 
     public static void main(String[] args)
     {
+        // int[][] input = {{1, 0, 1, 0},
+        //                 {2, 0, 1, 1},
+        //                 {1, 1, 1, 0},
+        //                 {2, 1, 1, 0}};
+        int[][] input2 = {{1,0,2}, {1,1,2}, {0,0,0}};
 
-        int[][] input = {{1, 0, 1, 0},
-                        {2, 0, 1, 1},
-                        {1, 1, 1, 0},
-                        {2, 1, 1, 0}};
-
-        System.out.print(checkMaxArea(input));
+        int[][] input3 = {{1, 0, 1, 0}, {0, 0, 1, 1}, {1, 1, 1, 0}, {0, 1, 1, 0}};
+        int[][] input4 = {{1, 2, 1, 2, 1}, {1, 2, 1, 1, 1}, {1, 1, 2, 1, 1}, {1, 2, 2, 2, 1}};
+        System.out.print(CheckLargestRegion(input4));
     }
 }
