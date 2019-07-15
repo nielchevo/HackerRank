@@ -1,19 +1,46 @@
 import java.util.HashMap;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 /**
  * maxContingousArea
  */
 public class maxContingousArea {
 
-    private static void checkLeft(int r, int c, int[][] mArr, int[][] temp) {
-        
-        //check boundaries
-        if(r < 0 || c < 0)
-            return;
+    private static int currentRegion = 0;
+    private static HashMap<Integer, Integer> listArea = new HashMap<>();
+
+    private static boolean checkLeft(int r, int c, int[][]mArr) 
+    {
+        try
+        {
+            if(mArr[r-1][c] == mArr[r][c])
+                return true;
+
+            return false;
+        }  
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            
+            System.out.println("array LEFT of out bound!");
+            return false;
+        }
     }
 
-    private static bool checkUp() {
-        
+    private static boolean checkUp(int r, int c, int[][]mArr) 
+    {
+        try
+        {
+            if(mArr[r][c-1] == mArr[r][c])
+                return true;
+            
+            return false;
+        }  
+        catch(ArrayIndexOutOfBoundsException ex)
+        {
+            System.out.println("array UP of out bound!");
+            return false;
+        }
     }
 
     private static int checkMaxArea(int[][] mArray) 
@@ -35,8 +62,45 @@ public class maxContingousArea {
         {
             for (int c=0; c<col; c++)
             {
-              
+                // check left and up of current array position.
+                
+                boolean isLeft  = checkLeft(r, c, mArray);
+                boolean isUp = checkUp(r, c, mArray);
 
+                if(isLeft && isUp)
+                {
+                    // Track this region
+                    mVisited[r][c] = mArray[r][c];
+                    
+                    continue;
+                }
+
+                if(isLeft)
+                {
+                    mVisited[r][c] = mVisited[r-1][c];
+
+                }
+                else if(isUp)
+                {
+                    mVisited[r][c] = mVisited[r][c-1];
+                }
+                else
+                {
+                    current_region++;
+                    mVisited[r][c] = current_region;
+                    listArea.put(current_region, mArray[r][c])
+                }
+                
+            }
+            System.out.println();
+        }
+
+        // check array visited
+        for(int i=0; i<row; i++)
+        {
+            for(int j=0; j<col; j++)
+            {
+                System.out.print(mVisited[i][j] + " ");
             }
             System.out.println();
         }
