@@ -2,7 +2,7 @@
 	https://www.hackerrank.com/challenges/quicksort1/problem
 */
 
-package main
+package sorting
 
 import (
 	"fmt"
@@ -36,7 +36,7 @@ func quickSort(arr []int) []int {
 	return arr
 }
 
-func main() {
+func QucksortUnitTest() {
 
 	input := []int{4, 5, 3, 7, 2}
 

@@ -4,7 +4,7 @@
 
 	TIME OUT in Test case 6 & 7
 */
-package main
+package sorting
 
 import "fmt"
 
@@ -48,7 +48,7 @@ func bigSorting(arr []string) []string {
 	return arr
 }
 
-func main() {
+func UnitTestBigSorting() {
 
 	input := []string{"31415926535897932384626433832795", "2", "1", "21", "22", "8"}
 
