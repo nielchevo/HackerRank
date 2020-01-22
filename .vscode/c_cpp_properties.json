@@ -23,10 +23,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}",
-                "C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include",
-                "C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
-                "C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                "C:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"
+                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
+                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
+                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"
             ],
             "defines": [
                 "_DEBUG",
@@ -34,7 +34,7 @@
                 "_UNICODE"
             ],
             "intelliSenseMode": "clang-x64",
-            "compilerPath": "C:/mingw64/bin/gcc.exe",
+            "compilerPath": "C:/MinGW64/mingw64/bin/gcc.exe",
             "browse": {
                 "path": [
                     "${workspaceFolder}",
