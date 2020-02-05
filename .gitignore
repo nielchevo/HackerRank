@@ -1,3 +1,4 @@
 .vscode/*
-.javascript/node_modules/*
+/Javascript/node_modules/
+/node_modules/
 *.exe
